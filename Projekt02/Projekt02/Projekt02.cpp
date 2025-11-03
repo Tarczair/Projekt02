@@ -17,15 +17,68 @@ private:
 
 	unique_ptr<Element> korzen;
 
+	void insert(unique_ptr<Element>& el, int value) {
+		if (!el)
+			el = make_unique<Element>(value);
+		else if (value < el->value)
+			insert(el->lewy, value);
+		else if (value > el->value)
+			insert(el->prawy, value);
+	}
+
+	void displayPreorder(Element* el, const string& prefix = "", bool right = false) {
+		if (!el) return;
+
+		cout << prefix;
+
+		// wybór symbolu gałęzi (bez operatora trójargumentowego)
+		string branch;
+		if (right)
+			branch = "|- ";
+		else
+			branch = "\\- ";
+
+		cout << branch << el->value << "\n";
+
+		// nowe wcięcie (prefiks)
+		string newPrefix = prefix;
+		if (right)
+			newPrefix += "|  ";
+		else
+			newPrefix += "   ";
+
+		// najpierw prawe poddrzewo, potem lewe
+		if (el->prawy)
+			displayPreorder(el->prawy.get(), newPrefix, true);
+		if (el->lewy)
+			displayPreorder(el->lewy.get(), newPrefix, false);
+	}
+
+
 public:
 	void insert(int value) {
-		if (!korzen) {
-
-		}
+		insert(korzen, value);
 	}
+
+
 	void remove(int value) {}
 	void findPath(int value) {}
-	void displayPreorder() {}
+
+	void displayPreorder() {
+		if (!korzen) {
+			cout << "(puste drzewo)\n";
+			return;
+		}
+
+		cout << korzen->value << "\n";
+
+		if (korzen->prawy)
+			displayPreorder(korzen->prawy.get(), "", true);
+		if (korzen->lewy)
+			displayPreorder(korzen->lewy.get(), "", false);
+	}
+
+
 	void displayInorder() {}
 	void displayPostorder() {}
 	void saveToFile(const string& filename) {}
