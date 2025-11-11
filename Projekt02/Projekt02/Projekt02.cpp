@@ -1,96 +1,13 @@
-﻿#include <iostream>
+﻿#include "bst.h"
+#include <iostream>
 #include <string>
-#include <fstream>
-#include <vector>
-#include <memory>
 
 using namespace std;
 
-class BST {
-private:
-	struct Element {
-		int value;
-		unique_ptr<Element> lewy;
-		unique_ptr<Element> prawy;
-		Element(int v) : value(v) {}
-	};
-
-	unique_ptr<Element> korzen;
-
-	void insert(unique_ptr<Element>& el, int value) {
-		if (!el)
-			el = make_unique<Element>(value);
-		else if (value < el->value)
-			insert(el->lewy, value);
-		else if (value > el->value)
-			insert(el->prawy, value);
-	}
-
-	void displayPreorder(Element* el, const string& prefix = "", bool right = false) {
-		if (!el) return;
-
-		cout << prefix;
-
-		// wybór symbolu gałęzi (bez operatora trójargumentowego)
-		string branch;
-		if (right)
-			branch = "|- ";
-		else
-			branch = "\\- ";
-
-		cout << branch << el->value << "\n";
-
-		// nowe wcięcie (prefiks)
-		string newPrefix = prefix;
-		if (right)
-			newPrefix += "|  ";
-		else
-			newPrefix += "   ";
-
-		// najpierw prawe poddrzewo, potem lewe
-		if (el->prawy)
-			displayPreorder(el->prawy.get(), newPrefix, true);
-		if (el->lewy)
-			displayPreorder(el->lewy.get(), newPrefix, false);
-	}
-
-
-public:
-	void insert(int value) {
-		insert(korzen, value);
-	}
-
-
-	void remove(int value) {}
-	void findPath(int value) {}
-
-	void displayPreorder() {
-		if (!korzen) {
-			cout << "(puste drzewo)\n";
-			return;
-		}
-
-		cout << korzen->value << "\n";
-
-		if (korzen->prawy)
-			displayPreorder(korzen->prawy.get(), "", true);
-		if (korzen->lewy)
-			displayPreorder(korzen->lewy.get(), "", false);
-	}
-
-
-	void displayInorder() {}
-	void displayPostorder() {}
-	void saveToFile(const string& filename) {}
-	void clear() {}
-
-
-
-};
-
 void menu() {
-	BST tree;
+	bst tree;
 	int choice, value;
+	string method;
 
 	do {
 		cout << "\n=== MENU DRZEWA BST ===\n";
@@ -108,7 +25,7 @@ void menu() {
 		case 1:
 			cout << "Podaj wartosc: ";
 			cin >> value;
-			tree.insert(value);
+			tree.add(value);
 			break;
 		case 2:
 			cout << "Podaj wartosc do usuniecia: ";
@@ -125,13 +42,9 @@ void menu() {
 			tree.findPath(value);
 			break;
 		case 5:
-			int typ;
-			cout << "Wybierz metode (1-preorder, 2-inorder, 3-postorder): ";
-			cin >> typ;
-			if (typ == 1) tree.displayPreorder();
-			else if (typ == 2) tree.displayInorder();
-			else if (typ == 3) tree.displayPostorder();
-			else std::cout << "Nieznana metoda!\n";
+			cout << "Podaj metode (preorder/inorder/postorder): ";
+			cin >> method;
+			tree.printTree(method);
 			break;
 		case 6:
 			tree.saveToFile("drzewo.txt");
@@ -144,7 +57,6 @@ void menu() {
 		}
 	} while (choice != 0);
 }
-
 
 int main() {
 	menu();
