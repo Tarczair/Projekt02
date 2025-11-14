@@ -296,11 +296,9 @@ void bst::findSuccessor(int startLevel, int startIndex, int& sLevel, int& sIndex
 	}
 }
 
-// ####### KONIEC BRAKUJ¥CYCH FUNKCJI #######
 
 
 // Funkcja pomocnicza do zbierania wszystkich potomków danego wêz³a
-// WA¯NE: Usunêliœmy "const" na koñcu, bo funkcja bêdzie teraz modyfikowaæ drzewo!
 void bst::collectSubtree(int level, int index, vector<int>& values) {
 	// 1. Pobierz wartoœæ bie¿¹cego wêz³a
 	int currentValue = getNodeValue(level, index);
@@ -313,8 +311,7 @@ void bst::collectSubtree(int level, int index, vector<int>& values) {
 	// 3. Dodaj bie¿¹c¹ wartoœæ do wektora "zebranych"
 	values.push_back(currentValue);
 
-	// 4. TO JEST POPRAWKA:
-	//    Natychmiast usuñ wêze³, który w³aœnie zebraliœmy.
+	// 4. Natychmiast usuñ wêze³, który w³aœnie zebraliœmy.   
 	setNodeValue(level, index, -1);
 
 	// 5. Rekurencyjnie zejdŸ do dzieci
