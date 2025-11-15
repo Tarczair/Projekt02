@@ -81,61 +81,47 @@ void bst::printGraphical() {
 	if (tree.empty()) {
 		cout << "Drzewo jest puste!\n";
 		return;
-	}
+	};
 
 	int height = tree.size();
-	int maxWidth = pow(2, height) * 2 - 1;
+	int baseSpacing = 32;
 
 	for (int level = 0; level < height; ++level) {
-		int nodesInLevel = tree[level].size();
-		int spacing = maxWidth / (nodesInLevel + 1);
+		int nodes = tree[level].size();
+		int spacing = baseSpacing >> level;
+		if (spacing < 2) spacing = 2;
 
-		for (int i = 0; i < nodesInLevel; ++i) {
+		// drukowanie wartoœci
+		cout << string(spacing / 2, ' ');
+		for (int i = 0; i < nodes; ++i) {
 			if (tree[level][i] != -1)
-				cout << setw(spacing) << tree[level][i];
+				cout << tree[level][i];
 			else
-				cout << setw(spacing) << " ";
+				cout << " ";
+			cout << string(spacing, ' ');
 		}
 		cout << endl;
 
+		// drukowanie ga³êzi
 		if (level < height - 1) {
-			bool hasChildren = false;
-			for (int i = 0; i < nodesInLevel; ++i) {
+			cout << string(spacing / 2, ' ');
+			for (int i = 0; i < nodes; ++i) {
 				int leftIdx = i * 2;
 				int rightIdx = i * 2 + 1;
-				if (level + 1 < tree.size()) {
-					if ((leftIdx < tree[level + 1].size() && tree[level + 1][leftIdx] != -1) ||
-						(rightIdx < tree[level + 1].size() && tree[level + 1][rightIdx] != -1)) {
-						hasChildren = true;
-						break;
-					}
-				}
+				bool hasLeft = leftIdx < tree[level + 1].size() && tree[level + 1][leftIdx] != -1;
+				bool hasRight = rightIdx < tree[level + 1].size() && tree[level + 1][rightIdx] != -1;
+
+				if (hasLeft && hasRight) cout << "/ \\";
+				else if (hasLeft) cout << "/";
+				else if (hasRight) cout << "\\";
+				else cout << " ";
+
+				cout << string(spacing, ' ');
 			}
-
-			if (hasChildren) {
-				cout << " ";
-				for (int i = 0; i < nodesInLevel; ++i) {
-					int leftIdx = i * 2;
-					int rightIdx = i * 2 + 1;
-					bool hasLeft = (level + 1 < tree.size() && leftIdx < tree[level + 1].size() && tree[level + 1][leftIdx] != -1);
-					bool hasRight = (level + 1 < tree.size() && rightIdx < tree[level + 1].size() && tree[level + 1][rightIdx] != -1);
-
-					string branch;
-					if (hasLeft && hasRight)
-						branch = "/ \\ ";
-					else if (hasLeft)
-						branch = "/";
-					else if (hasRight)
-						branch = " \\ ";
-					else
-						branch = " ";
-
-					cout << setw(spacing) << branch;
-				}
-				cout << endl;
-			}
+			cout << endl;
 		}
 	}
+
 }
 
 void bst::findPath(int value) {

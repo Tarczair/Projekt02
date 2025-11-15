@@ -37,6 +37,8 @@ public:
 	void printGraphical();
 	void saveToFile(const string& filename);
 	void findPath(int value);
+	const vector<vector<int>>& getTree() const { return tree; }
+	void setTree(const vector<vector<int>>& newTree) { tree = newTree; }
 };
 
 #endif
