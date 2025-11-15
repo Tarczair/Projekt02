@@ -80,7 +80,7 @@ void bst::printTree(string method) {
 
 void bst::printGraphical() {
 	if (tree.empty()) {
-		cout << "Drzewo jest puste.\n";
+		cout << "Drzewo jest puste!\n";
 		return;
 	}
 
@@ -145,7 +145,7 @@ void bst::findPath(int value) {
 		return;
 	}
 
-	cout << "Sciezka do " << value << ": ";
+	cout << "Sciezka do: " << value << ": ";
 
 	int level = 0;
 	int index = 0;
@@ -153,7 +153,7 @@ void bst::findPath(int value) {
 	while (true) {
 		
 		if (level >= tree.size() || index >= tree[level].size() || tree[level][index] == -1) {
-			cout << "\nElementu nie znaleziono." << endl;
+			cout << "\nElementu nie zostal znaleziono." << endl;
 			return;
 		}
 
@@ -161,7 +161,7 @@ void bst::findPath(int value) {
 		cout << currentValue;
 
 		if (currentValue == value) {
-			cout << "\nElement znaleziony." << endl;
+			cout << "\nElement zostal znaleziony." << endl;
 			return;
 		}
 
@@ -338,5 +338,5 @@ void bst::remove(int value) {
 	}
 
 	removeNodeAt(level, index);
-	cout << "Zakonczono usuwanie " << value << "." << endl;
+	cout << "Pomyœlnie zakoñczono usuwanie " << value << "." << endl;
 }

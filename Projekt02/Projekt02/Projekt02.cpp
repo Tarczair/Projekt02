@@ -24,12 +24,12 @@ void menu() {
 		//Komentarz testowy aby wywołać konflikt
 		switch (choice) {
 		case 1:
-			cout << "Podaj wartosc: ";
+			cout << "Podaj calkowita liczbe: ";
 			cin >> value;
 			tree.add(value);
 			break;
 		case 2:
-			cout << "Podaj wartosc do usuniecia: ";
+			cout << "Podaj calkowita liczbe do usuniecia: ";
 			cin >> value;
 			tree.remove(value);
 			break;
@@ -38,7 +38,7 @@ void menu() {
 			cout << "Drzewo zostalo usuniete.\n";
 			break;
 		case 4:
-			cout << "Podaj wartosc do znalezienia: ";
+			cout << "Podaj calkowita liczbe do znalezienia: ";
 			cin >> value;
 			tree.findPath(value);
 			break;
