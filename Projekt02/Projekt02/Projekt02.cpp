@@ -19,9 +19,6 @@ void menu() {
 		cout << "6. Zapisz drzewo do pliku\n";
 		cout << "0. Wyjdz\n";
 		cout << "Twoj wybor: ";
-
-		cout << "0. Wyjdz\n";
-		cout << "Twoj wybor: ";
 		cin >> choice;
 
 		switch (choice) {

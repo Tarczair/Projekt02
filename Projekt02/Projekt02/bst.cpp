@@ -2,6 +2,10 @@
 
 bst::bst() {}
 
+void bst::clear() {
+	tree.clear();
+}
+
 void bst::inorder(int level, int index) {
 	if (level >= tree.size() || index >= tree[level].size() || tree[level][index] == -1) return;
 	inorder(level + 1, index * 2);
@@ -62,9 +66,7 @@ void bst::add(int value) {
 }
 
 
-void bst::clear() {
-	tree.clear();
-}
+
 
 void bst::printTree(string method) {
 	cout << "Drzewo (" << method << "): ";
@@ -138,7 +140,7 @@ void bst::printGraphical() {
 
 void bst::findPath(int value) {
 	if (tree.empty()) {
-		cout << "Drzewo jest puste." << endl;
+		cout << "Drzewo jest puste. " << endl;
 		return;
 	}
 
