@@ -2,7 +2,6 @@
 
 bst::bst() {}
 
-//przerzucone do góry aby wywo³aæ konflikt
 void bst::clear() {
 	tree.clear();
 }

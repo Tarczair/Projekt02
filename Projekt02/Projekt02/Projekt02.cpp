@@ -21,7 +21,6 @@ void menu() {
 		cout << "Twoj wybor: ";
 		cin >> choice;
 
-		//Komentarz testowy aby wywołać konflikt
 		switch (choice) {
 		case 1:
 			cout << "Podaj calkowita liczbe: ";
