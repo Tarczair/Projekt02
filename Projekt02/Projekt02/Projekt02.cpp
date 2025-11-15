@@ -11,12 +11,15 @@ void menu() {
 
 	do {
 		cout << "\n=== MENU DRZEWA BST ===\n";
-		cout << "i. Dodaj nowy element\n";
-		cout << "ii.Usun element\n";
-		cout << "iii. Usun cale drzewo\n";
-		cout << "iv. Szukaj drogi do elementu\n";
-		cout << "v. Wyswietl drzewo (preorder/inorder/postorder)\n";
-		cout << "vi. Zapisz drzewo do pliku\n";
+		cout << "1. Dodaj nowy element\n";
+		cout << "2.Usun element\n";
+		cout << "3. Usun cale drzewo\n";
+		cout << "4. Szukaj drogi do elementu\n";
+		cout << "5. Wyswietl drzewo (preorder/inorder/postorder)\n";
+		cout << "6. Zapisz drzewo do pliku\n";
+		cout << "0. Wyjdz\n";
+		cout << "Twoj wybor: ";
+
 		cout << "0. Wyjdz\n";
 		cout << "Twoj wybor: ";
 		cin >> choice;
