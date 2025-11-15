@@ -11,24 +11,24 @@ void menu() {
 
 	do {
 		cout << "\n=== MENU DRZEWA BST ===\n";
-		cout << "I. Dodaj element\n";
-		cout << "II. Usun element\n";
-		cout << "IV. Usun cale drzewo\n";
-		cout << "V. Szukaj drogi do elementu\n";
-		cout << "VI. Wyswietl drzewo (preorder/inorder/postorder)\n";
-		cout << "VII. Zapisz drzewo do pliku\n";
-		cout << "VIII. Wyjdz\n";
+		cout << "1. Dodaj nowy element\n";
+		cout << "2. Usun element\n";
+		cout << "3. Usun cale drzewo\n";
+		cout << "4. Szukaj drogi do elementu\n";
+		cout << "5. Wyswietl drzewo (preorder/inorder/postorder)\n";
+		cout << "6. Zapisz drzewo do pliku\n";
+		cout << "0. Wyjdz\n";
 		cout << "Twoj wybor: ";
 		cin >> choice;
 
 		switch (choice) {
 		case 1:
-			cout << "Podaj wartosc: ";
+			cout << "Podaj calkowita liczbe: ";
 			cin >> value;
 			tree.add(value);
 			break;
 		case 2:
-			cout << "Podaj wartosc do usuniecia: ";
+			cout << "Podaj calkowita liczbe do usuniecia: ";
 			cin >> value;
 			tree.remove(value);
 			break;
@@ -37,7 +37,7 @@ void menu() {
 			cout << "Drzewo zostalo usuniete.\n";
 			break;
 		case 4:
-			cout << "Podaj wartosc do znalezienia: ";
+			cout << "Podaj calkowita liczbe do znalezienia: ";
 			cin >> value;
 			tree.findPath(value);
 			break;
