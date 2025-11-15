@@ -2,8 +2,6 @@
 
 bst::bst() {}
 
-
-
 void bst::inorder(int level, int index) {
 	if (level >= tree.size() || index >= tree[level].size() || tree[level][index] == -1) return;
 	inorder(level + 1, index * 2);
@@ -11,14 +9,12 @@ void bst::inorder(int level, int index) {
 	inorder(level + 1, index * 2 + 1);
 }
 
-
 void bst::postorder(int level, int index) {
 	if (level >= tree.size() || index >= tree[level].size() || tree[level][index] == -1) return;
 	postorder(level + 1, index * 2);
 	postorder(level + 1, index * 2 + 1);
 	cout << tree[level][index] << " ";
 }
-
 
 void bst::preorder(int level, int index) {
 	if (level >= tree.size() || index >= tree[level].size() || tree[level][index] == -1) return;
@@ -30,7 +26,6 @@ void bst::preorder(int level, int index) {
 void bst::ensureLevel(int level) {
 	if (level >= tree.size()) tree.resize(level + 1);
 }
-
 
 void bst::add(int value) {
 	if (tree.empty()) {
@@ -71,7 +66,6 @@ void bst::clear() {
 	tree.clear();
 }
 
-
 void bst::printTree(string method) {
 	cout << "Drzewo (" << method << "): ";
 	if (method == "preorder") preorder(0, 0);
@@ -80,8 +74,6 @@ void bst::printTree(string method) {
 	cout << endl;
 	printGraphical();
 }
-
-
 
 void bst::printGraphical() {
 	if (tree.empty()) {
@@ -144,14 +136,6 @@ void bst::printGraphical() {
 	}
 }
 
-
-
-
-
-
-
-
-
 void bst::findPath(int value) {
 	if (tree.empty()) {
 		cout << "Drzewo jest puste." << endl;
@@ -193,18 +177,15 @@ void bst::findPath(int value) {
 	}
 }
 
-
 void bst::saveToFile(const string& filename) {
 	
 	ofstream plik(filename);
 
-	
 	if (!plik.is_open()) {
 		cout << "B£¥D: Nie mozna otworzyc pliku do zapisu: " << filename << endl;
 		return;
 	}
 
-	
 	if (tree.empty()) {
 		plik << "Drzewo jest puste." << endl;
 		plik.close();
@@ -212,7 +193,6 @@ void bst::saveToFile(const string& filename) {
 		return;
 	}
 
-	
 	for (int i = 0; i < tree.size(); ++i) {
 		
 		for (int j = 0; j < tree[i].size(); ++j) {
@@ -223,14 +203,10 @@ void bst::saveToFile(const string& filename) {
 		plik << endl;
 	}
 
-	
 	plik.close();
 
 	cout << "Drzewo zostalo poprawnie zapisane do pliku: " << filename << endl;
 }
-
-
-
 
 int bst::getNodeValue(int level, int index) const {
 	if (level >= tree.size() || index >= tree[level].size()) {
@@ -239,7 +215,6 @@ int bst::getNodeValue(int level, int index) const {
 	return tree[level][index];
 }
 
-
 void bst::setNodeValue(int level, int index, int value) {
 	ensureLevel(level); 
 	if (index >= tree[level].size()) {
@@ -247,7 +222,6 @@ void bst::setNodeValue(int level, int index, int value) {
 	}
 	tree[level][index] = value;
 }
-
 
 void bst::findNode(int value, int& level, int& index, bool& found) const {
 	if (tree.empty()) {
@@ -280,52 +254,43 @@ void bst::findNode(int value, int& level, int& index, bool& found) const {
 	}
 }
 
-
 void bst::findSuccessor(int startLevel, int startIndex, int& sLevel, int& sIndex) const {
 	
 	sLevel = startLevel + 1;
 	sIndex = startIndex * 2 + 1;
 
-	
 	while (getNodeValue(sLevel + 1, sIndex * 2) != -1) {
 		sLevel++;
 		sIndex = sIndex * 2;
 	}
 }
 
-
 void bst::collectSubtree(int level, int index, vector<int>& values) {
 	
 	int currentValue = getNodeValue(level, index);
-
 	
 	if (currentValue == -1) {
 		return;
 	}
-
 	
 	values.push_back(currentValue);
 
 	setNodeValue(level, index, -1);
 
-	
 	collectSubtree(level + 1, index * 2, values);     
 	collectSubtree(level + 1, index * 2 + 1, values); 
 }
-
 
 void bst::removeNodeAt(int level, int index) {
 	
 	int leftChildVal = getNodeValue(level + 1, index * 2);
 	int rightChildVal = getNodeValue(level + 1, index * 2 + 1);
 
-	
 	if (leftChildVal == -1 && rightChildVal == -1) {
 		setNodeValue(level, index, -1);
 		cout << "Informacja: Usunieto lisc." << endl;
 	}
 
-	
 	else if (leftChildVal != -1 && rightChildVal != -1) {
 		cout << "Informacja: Usuwanie wezla z 2 dzieci (przez kopiowanie)." << endl;
 
@@ -341,20 +306,15 @@ void bst::removeNodeAt(int level, int index) {
 	else {
 		cout << "Informacja: Usuwanie wezla z 1 dzieckiem (przez ponowne dodanie)." << endl;
 
-		
 		int childLevel = level + 1;
 		int childIndex = (leftChildVal != -1) ? (index * 2) : (index * 2 + 1);
 
-		
 		vector<int> descendants;
 
-		
 		collectSubtree(childLevel, childIndex, descendants);
 
-		
 		setNodeValue(level, index, -1);
 
-		
 		cout << "Informacja: Ponowne dodawanie " << descendants.size() << " potomkow..." << endl;
 		for (int value : descendants) {
 			add(value);
@@ -362,13 +322,11 @@ void bst::removeNodeAt(int level, int index) {
 	}
 }
 
-
 void bst::remove(int value) {
 	int level = 0;
 	int index = 0;
 	bool found = false;
 
-	
 	findNode(value, level, index, found);
 
 	if (!found) {
@@ -376,7 +334,6 @@ void bst::remove(int value) {
 		return;
 	}
 
-	
 	removeNodeAt(level, index);
 	cout << "Zakonczono usuwanie " << value << "." << endl;
 }
