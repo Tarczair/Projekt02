@@ -1,4 +1,5 @@
 ﻿#include "bst.h"
+#include "bstIO.h"
 #include <iostream>
 #include <string>
 
@@ -17,38 +18,73 @@ void menu() {
 		cout << "4. Szukaj drogi do elementu\n";
 		cout << "5. Wyswietl drzewo (preorder/inorder/postorder)\n";
 		cout << "6. Zapisz drzewo do pliku\n";
+		cout << "7. Zapisz drzewo do pliku binarnego\n";
+		cout << "8. Wczytaj drzewo z pliku binarnego\n";
+		cout << "9. Wczytaj plik tekstowy z liczbami do drzewa\n";
 		cout << "0. Wyjdz\n";
 		cout << "Twoj wybor: ";
 		cin >> choice;
 
 		switch (choice) {
-		case 1:
+		case 1: {
 			cout << "Podaj calkowita liczbe: ";
 			cin >> value;
 			tree.add(value);
 			break;
-		case 2:
+		}
+		case 2: {
 			cout << "Podaj calkowita liczbe do usuniecia: ";
 			cin >> value;
 			tree.remove(value);
 			break;
-		case 3:
+		}
+		case 3: {
 			tree.clear();
 			cout << "Drzewo zostalo usuniete.\n";
 			break;
-		case 4:
+		}
+		case 4: {
 			cout << "Podaj calkowita liczbe do znalezienia: ";
 			cin >> value;
 			tree.findPath(value);
 			break;
-		case 5:
+		}
+		case 5: {
 			cout << "Podaj metode (preorder/inorder/postorder): ";
 			cin >> method;
 			tree.printTree(method);
 			break;
-		case 6:
+		}
+		case 6: {
 			tree.saveToFile("drzewo.txt");
 			break;
+		}
+		case 7: {
+			string fname;
+			cout << "Podaj nazwę pliku BIN: ";
+			cin >> fname;
+			bstIO::saveBinary(fname, tree);
+			break;
+		}
+		case 8: {
+			string fname;
+			cout << "Podaj nazwę pliku BIN: ";
+			cin >> fname;
+			bstIO::loadBinary(fname, tree);
+			break;
+		}
+		case 9: {
+			string fname;
+			cout << "Podaj nazwę pliku TXT: ";
+			cin >> fname;
+
+			char mode;
+			cout << "Dodać do istniejącego drzewa? (t/n): ";
+			cin >> mode;
+
+			bstIO::loadFromTextFile(fname, tree, mode == 't' || mode == 'T');
+			break;
+		}
 		case 0:
 			cout << "Koniec programu.\n";
 			break;

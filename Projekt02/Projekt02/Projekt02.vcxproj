@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bst.cpp" />
+    <ClCompile Include="bstIO.cpp" />
     <ClCompile Include="Projekt02.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bst.h" />
+    <ClInclude Include="bstIO.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
