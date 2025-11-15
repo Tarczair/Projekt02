@@ -11,16 +11,17 @@ void menu() {
 
 	do {
 		cout << "\n=== MENU DRZEWA BST ===\n";
-		cout << "I. Dodaj element\n";
-		cout << "II. Usun element\n";
-		cout << "IV. Usun cale drzewo\n";
-		cout << "V. Szukaj drogi do elementu\n";
-		cout << "VI. Wyswietl drzewo (preorder/inorder/postorder)\n";
-		cout << "VII. Zapisz drzewo do pliku\n";
-		cout << "VIII. Wyjdz\n";
+		cout << "1. Dodaj element\n";
+		cout << "2. Usun element\n";
+		cout << "3. Usun cale drzewo\n";
+		cout << "4. Szukaj drogi do elementu\n";
+		cout << "5. Wyswietl drzewo (preorder/inorder/postorder)\n";
+		cout << "6. Zapisz drzewo do pliku\n";
+		cout << "0. Wyjdz\n";
 		cout << "Twoj wybor: ";
 		cin >> choice;
 
+		//Komentarz testowy aby wywołać konflikt
 		switch (choice) {
 		case 1:
 			cout << "Podaj wartosc: ";
