@@ -1,3 +1,8 @@
+/**
+ * @file bstIO.cpp
+ * @brief Implementacja funkcji wczytywania i zapisywania drzewa BST do plikow binarnych i tekstowych.
+ */
+
 #include "bstIO.h"
 #include <fstream>
 #include <cstdint>
@@ -5,10 +10,21 @@
 
 using namespace std;
 
+/**
+ * @brief Zapisuje cale drzewo BST do pliku binarnego.
+ *
+ * Format pliku:
+ * - liczba poziomow (int32_t),
+ * - dla kazdego poziomu: liczba elementow (int32_t),
+ * - kolejne wartosci wezlow danego poziomu (int32_t).
+ *
+ * @param filename Nazwa pliku binarnego.
+ * @param treeObj Obiekt drzewa BST do zapisania.
+ */
 void bstIO::saveBinary(const string& filename, const bst& treeObj) {
     ofstream ofs(filename, ios::binary);
     if (!ofs.is_open()) {
-        cout << "B£¥D: Nie mozna otworzyæ pliku binarnego: " << filename << endl;
+        cout << "BLAD: Nie mozna otworzyc pliku binarnego: " << filename << endl;
         return;
     }
 
@@ -30,10 +46,23 @@ void bstIO::saveBinary(const string& filename, const bst& treeObj) {
     cout << "Zapisano drzewo binarnie do pliku: " << filename << endl;
 }
 
+/**
+ * @brief Wczytuje drzewo BST z pliku binarnego.
+ *
+ * Oczekiwany format zgodny z saveBinary():
+ * - liczba poziomow,
+ * - dla kazdego poziomu liczba wezlow,
+ * - wartosci wezlow.
+ *
+ * Po wczytaniu struktura drzewa jest w calosci nadpisywana.
+ *
+ * @param filename Nazwa pliku do wczytania.
+ * @param treeObj Obiekt drzewa, do ktorego dane maja zostac wczytane.
+ */
 void bstIO::loadBinary(const string& filename, bst& treeObj) {
     ifstream ifs(filename, ios::binary);
     if (!ifs.is_open()) {
-        cout << "B£¥D: Nie mozna otworzyæ pliku binarnego: " << filename << endl;
+        cout << "BLAD: Nie mozna otworzyc pliku binarnego: " << filename << endl;
         return;
     }
 
@@ -59,10 +88,19 @@ void bstIO::loadBinary(const string& filename, bst& treeObj) {
     cout << "Wczytano drzewo z pliku binarnego: " << filename << endl;
 }
 
+/**
+ * @brief Wczytuje liczby z pliku tekstowego i dodaje je do drzewa.
+ *
+ * Kazda liczba jest odczytywana sekwencyjnie i dodawana przez standardowa funkcje add().
+ *
+ * @param filename Nazwa pliku tekstowego.
+ * @param treeObj Obiekt drzewa BST, do ktorego dane maja zostac wczytane.
+ * @param append Okresla czy dopisywac dane do istniejacego drzewa (true), czy je wyczyscic przed wczytaniem (false).
+ */
 void bstIO::loadFromTextFile(const string& filename, bst& treeObj, bool append) {
     ifstream ifs(filename);
     if (!ifs.is_open()) {
-        cout << "B£¥D: Nie mozna otworzyæ pliku: " << filename << endl;
+        cout << "BLAD: Nie mozna otworzyc pliku: " << filename << endl;
         return;
     }
 
@@ -79,5 +117,5 @@ void bstIO::loadFromTextFile(const string& filename, bst& treeObj, bool append) 
         count++;
     }
 
-    cout << "Wczytano " << count << " wartoœci z pliku: " << filename << endl;
+    cout << "Wczytano " << count << " wartosci z pliku: " << filename << endl;
 }
